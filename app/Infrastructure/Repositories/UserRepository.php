@@ -24,24 +24,24 @@ class UserRepository implements UserRepositoryInterface
     public function create(UserEntity $user): UserEntity
     {
         $model = User::create([
-            'name' => $user->name,
+            'username' => $user->username,
             'email' => $user->email,
             'password' => bcrypt($user->password),
         ]);
 
-        return new UserEntity($model->id, $model->name, $model->email, $model->password);
+        return new UserEntity($model->id, $model->username, $model->email, $model->password);
     }
 
     public function update(UserEntity $user): UserEntity
     {
         $model = User::findOrFail($user->id);
         $model->update([
-            'name' => $user->name,
+            'username' => $user->username,
             'email' => $user->email,
             'password' => bcrypt($user->password),
         ]);
 
-        return new UserEntity($model->id, $model->name, $model->email, $model->password);
+        return new UserEntity($model->id, $model->username, $model->email, $model->password);
     }
 
     public function delete(int $id): bool

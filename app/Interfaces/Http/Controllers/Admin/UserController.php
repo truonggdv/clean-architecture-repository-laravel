@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->userService->createUser($request->name, $request->email, $request->password);
+        $this->userService->createUser(1111, 'email@gmail.com', 1111);
         return redirect()->route('users.index');
     }
 
