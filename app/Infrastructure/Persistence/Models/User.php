@@ -18,9 +18,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'shop_id',
         'username',
+        'fullname',
+        'account_type',
         'email',
+        'email_verified_at',
         'password',
+        'balance',
+        'remember_token',
+        'provider_id',
+        'google2fa_enable',
+        'google2fa_secret',
+        'two_factor_recovery_codes',
     ];
 
     /**
@@ -31,6 +41,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'email_verified_at',
+        'google2fa_enable',
+        'google2fa_secret',
+        'two_factor_recovery_codes',
     ];
 
     /**

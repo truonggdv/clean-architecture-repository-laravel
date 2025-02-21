@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Interfaces\Http\Controllers\Admin\UserController;
 
 
 
@@ -15,8 +14,6 @@ use App\Interfaces\Http\Controllers\Admin\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('users', UserController::class);

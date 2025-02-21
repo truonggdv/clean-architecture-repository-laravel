@@ -5,15 +5,39 @@ namespace App\Core\Domain\Entities;
 class UserEntity
 {
     public ?int $id;
+    public ?int $shop_id;
     public string $username;
+    public ?string $fullname;
+    public int $account_type;
     public string $email;
-    public string $password;
+    public ?string $email_verified_at;
+    public ?string $password;
+    public ?int $balance;
+    public ?string $remember_token;
+    public ?string $provider_id;
+    public ?int $google2fa_enable;
+    public ?string $google2fa_secret;
+    public ?string $two_factor_recovery_codes;
+    public ?string $created_at;
+    public ?string $updated_at;
 
-    public function __construct(?int $id, string $username, string $email, string $password)
+    public function __construct(array $data)
     {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
+        $this->id = $data['id'] ?? null;
+        $this->shop_id = $data['shop_id'] ?? null;
+        $this->username = $data['username'];
+        $this->fullname = $data['fullname'] ?? null;
+        $this->account_type = $data['account_type'] ?? 1;
+        $this->email = $data['email'];
+        $this->email_verified_at = $data['email_verified_at'] ?? null;
+        $this->password = $data['password']??null;
+        $this->balance = $data['balance'] ?? 0;
+        $this->remember_token = $data['remember_token'] ?? null;
+        $this->provider_id = $data['provider_id'] ?? null;
+        $this->google2fa_enable = $data['google2fa_enable'] ?? 0;
+        $this->google2fa_secret = $data['google2fa_secret'] ?? null;
+        $this->two_factor_recovery_codes = $data['two_factor_recovery_codes'] ?? null;
+        $this->created_at = $data['created_at'] ?? null;
+        $this->updated_at = $data['updated_at'] ?? null;
     }
 }
