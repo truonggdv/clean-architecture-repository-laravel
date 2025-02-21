@@ -52,7 +52,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
-     public function showRegisterForm()
+    public function showRegisterForm()
     {
         return view('admin.auth.register');
     }

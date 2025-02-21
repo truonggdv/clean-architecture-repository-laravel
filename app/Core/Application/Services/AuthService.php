@@ -3,6 +3,7 @@
 namespace App\Core\Application\Services;
 use App\Core\Domain\Repositories\AuthRepositoryInterface;
 use App\Core\Domain\Entities\UserEntity;
+use App\Core\Domain\DTO\BaseResponse;
 
 class AuthService{
 
@@ -21,7 +22,7 @@ class AuthService{
     /**
      * Xử lý đăng nhập
      */
-    public function login(string $email, string $password): ?UserEntity
+    public function login(string $email, string $password): BaseResponse
     {
         return $this->authRepository->login($email, $password);
     }
