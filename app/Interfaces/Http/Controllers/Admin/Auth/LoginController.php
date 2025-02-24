@@ -5,10 +5,11 @@ namespace App\Interfaces\Http\Controllers\Admin\Auth;
 use App\Interfaces\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Interfaces\Http\Requests\LoginRequest;
+use App\Interfaces\Http\Requests\Auth\LoginRequest;
 use App\Core\Domain\Entities\UserEntity;
 use App\Core\Application\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -34,6 +35,12 @@ class LoginController extends Controller
 
     protected AuthService $authService;
 
+    protected $redirectAfterLogout ="";
+
+    protected $maxAttempts=5;
+
+    protected $decayMinutes=3;
+
     /**
      * Create a new controller instance.
      *
@@ -43,6 +50,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->authService = $authService;
+        $this->redirectTo = route('admin.dashboard');
+        $this->redirectAfterLogout = route('admin.login');
     }
 
     public function showLoginForm()
@@ -60,7 +69,7 @@ class LoginController extends Controller
         $result = $this->authService->login($username,$password);
 
         if ($result->success === false) {
-            return redirect()->back()->with('errors', $result->message);
+            return redirect()->back()->withErrors($result->message);
         }
         $user = $result->data;
 
@@ -68,5 +77,21 @@ class LoginController extends Controller
 
         return redirect()->intended($this->redirectPath());
         
+    }
+    public function logout(Request $request){
+
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()? new JsonResponse([], 204) : redirect($this->redirectAfterLogout);
     }
 }

@@ -50,12 +50,6 @@ class Menu
 
                     }
                 }
-                // else(!Auth::user()->hasRole('admin') && Auth::user()->can([$item['permission']])){
-
-                // }
-                // else{
-                //     return;
-                // }
             }
             else{
                 if(Auth::user()->hasRole('admin')){
@@ -94,12 +88,6 @@ class Menu
 
                     }
                 }
-                // elseif(!Auth::user()->hasRole('admin') && Auth::user()->can([$item['permission']])){
-
-                // }
-                // else{
-                //     return;
-                // }
             }
             else{
                 if(Auth::user()->hasRole('admin')){
@@ -113,8 +101,7 @@ class Menu
             $item_attr = '';
 
             if (isset($item['submenu'])) {
-                $item_class .= ' menu-item-submenu'; // m-menu__item--active
-
+                $item_class .= ' menu-item-submenu'; 
                 if (isset($item['toggle']) && $item['toggle'] == 'click') {
                     $item_attr .= ' data-menu-toggle="click"';
                 } else {

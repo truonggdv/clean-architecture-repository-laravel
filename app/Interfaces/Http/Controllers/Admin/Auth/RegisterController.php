@@ -6,7 +6,7 @@ use App\Interfaces\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use App\Interfaces\Http\Requests\RegisterRequest;
+use App\Interfaces\Http\Requests\Auth\RegisterRequest;
 use App\Core\Domain\Entities\UserEntity;
 use App\Core\Application\Services\AuthService;
 use Illuminate\Support\Facades\Auth;

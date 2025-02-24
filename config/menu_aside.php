@@ -34,46 +34,18 @@ return [
             'permission' =>'security-2fa',
             'page' => '',
         ],
-        [
-            'section' => 'Tài khoản',
-            'permission' => 'user-list,user-qtv-list',
-        ],
-        [
-            'title' => 'Danh sách QTV',
-            'icon' => 'fas fa-user-cog',
-            'bullet' => 'line',
-            'permission' => 'user-qtv-list',
-            'route' => 'admin.user-qtv.index',
-            'page' => ''
-        ],
-        [
-            'section' => 'Hubspot',
-            'permission' => 'hubspot-user-list',
-        ],
-        [
-            'title' => 'Danh sách người dùng',
-            'icon' => 'flaticon-interface-3',
-            'bullet' => 'line',
-            'permission' => 'hubspot-user-list',
-            'route' => 'admin.hubspot-user.index',
-            'page' => ''
-        ],
-        [
-            'title' => 'Danh sách Ticket',
-            'icon' => 'flaticon-interface-3',
-            'bullet' => 'line',
-            'permission' => 'hubspot-ticket-list',
-            'route' => 'admin.hubspot-ticket.index',
-            'page' => ''
-        ],
-        [
-            'title' => 'Danh sách Deal',
-            'icon' => 'flaticon-interface-3',
-            'bullet' => 'line',
-            'permission' => 'hubspot-deal-list',
-            'route' => 'admin.hubspot-deal.index',
-            'page' => ''
-        ],
+        // [
+        //     'section' => 'Tài khoản',
+        //     'permission' => 'user-list,user-qtv-list',
+        // ],
+        // [
+        //     'title' => 'Danh sách QTV',
+        //     'icon' => 'fas fa-user-cog',
+        //     'bullet' => 'line',
+        //     'permission' => 'user-qtv-list',
+        //     'route' => 'admin.user-qtv.index',
+        //     'page' => ''
+        // ],
     ]
 
 ];

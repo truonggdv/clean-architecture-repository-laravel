@@ -8,5 +8,4 @@ interface AuthRepositoryInterface
 {
     public function register(UserEntity $data): UserEntity;
     public function login($username, $password);
-    // public function logout(): void;
 }

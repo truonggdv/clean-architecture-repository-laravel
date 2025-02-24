@@ -5,7 +5,7 @@ use App\Core\Domain\Repositories\AuthRepositoryInterface;
 use App\Core\Domain\Entities\UserEntity;
 use App\Core\Domain\DTO\BaseResponse;
 
-class AuthService{
+class AuthService {
 
     protected AuthRepositoryInterface $authRepository;
 
