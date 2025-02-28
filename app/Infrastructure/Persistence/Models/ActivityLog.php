@@ -4,6 +4,7 @@ namespace App\Infrastructure\Persistence\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Library\Helpers;
 
 class ActivityLog extends BaseModel
 {
@@ -24,7 +25,6 @@ class ActivityLog extends BaseModel
 		'user_id',
 		'prefix',
         'method',
-        'response_code',
 		'url',
 		'input',
         'description',
@@ -36,26 +36,26 @@ class ActivityLog extends BaseModel
         'updated_at',
         'deleted_at'
     ];
-    public static function add(Request $request,$description="")
+    public static function add($description="")
     {
-        $input=$request->except(['_token']);
+        $input=\Request::except(['_token']);
         $encrypt_input=config('activity_log.encrypt_input')??[];
         foreach ($encrypt_input as $item) {
-            if($request->filled($item)){
+            if(\Request::filled($item)){
                 $input[$item]=Helpers::Encrypt($input[$item],config('activity_log.site_secret'));
             }
         }
         $log = [
             'user_id' => auth()->user()->id??null,
-            'prefix'    => $request->route()->getPrefix(),
-            'url'    => $request->fullUrl(),
+            'prefix'    => \Request::route()->getPrefix(),
+            'url'    => \Request::fullUrl(),
             'description'   => $description,
-            'method'  => $request->method(),
-            'ip'      => $request->getClientIp(),
-            'user_agent'      => $request->userAgent(),
+            'method'  => \Request::method(),
+            'ip'      => \Request::getClientIp(),
+            'user_agent'      => \Request::userAgent(),
             'input'   => json_encode($input),
         ];
-        ActivityLog::create($log);
+        return ActivityLog::create($log);
     }
     public static function boot()
     {

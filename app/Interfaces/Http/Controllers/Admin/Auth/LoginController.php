@@ -41,12 +41,17 @@ class LoginController extends Controller
 
     protected $decayMinutes=3;
 
+    protected ActivityLogService $activity_log_service;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(AuthService $authService)
+    public function __construct(
+            AuthService $authService,
+            ActivityLogService $activity_log_service
+        )
     {
         $this->middleware('guest')->except('logout');
         $this->authService = $authService;
@@ -75,10 +80,14 @@ class LoginController extends Controller
 
         Auth::loginUsingId($user->id);
 
+        $this->activity_log_service->add('Đăng nhập ADMIN thành công');
+
         return redirect()->intended($this->redirectPath());
         
     }
     public function logout(Request $request){
+
+        $this->activity_log_service->add('Đăng xuất tài khoản ADMIN thành công');
 
         $this->guard()->logout();
 

@@ -15,8 +15,9 @@ class ActivityLogRespositories implements ActivityLogRepositoryInterface
        
     }
 
-    public function add(ActivityLogEntity $data) : ActivityLogEntity
+    public function add($content) : ActivityLogEntity
     {
-        dd($data);
+        $log = ActivityLog::add($content);
+        return new ActivityLogEntity($log->toArray());
     }
 }

@@ -9,7 +9,6 @@ class ActivityLogEntity
     public int $user_id;
     public string $prefix;
     public string $method;
-    public string $response_code;
     public string $url;
     public string $input;
     public string $description;
@@ -25,7 +24,6 @@ class ActivityLogEntity
         $this->user_id = $data['user_id'];
         $this->prefix = $data['prefix'];
         $this->method = $data['method'];
-        $this->response_code = $data['response_code'] ?? null;
         $this->url = $data['url'];
         $this->input = $data['input'] ?? null;
         $this->description = $data['description'] ?? null;

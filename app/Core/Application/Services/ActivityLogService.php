@@ -3,6 +3,7 @@
 namespace App\Core\Application\Services;
 use App\Core\Domain\Entities\ActivityLogEntity;
 use App\Core\Domain\DTO\BaseResponse;
+use App\Core\Domain\Repositories\ActivityLogRepositoryInterface;
 class ActivityLogService
 {
 
@@ -13,8 +14,8 @@ class ActivityLogService
        $this->activityLogRepository = $activityLogRepository;
     }
 
-    public function add(ActivityLogEntity $data): ActivityLogEntity
+    public function add($content): ActivityLogEntity
     {
-        return $this->activityLogRepository->add($data);
+        return $this->activityLogRepository->add($content);
     }
 }
