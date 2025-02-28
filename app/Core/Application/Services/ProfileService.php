@@ -18,8 +18,8 @@ class ProfileService {
     {
         return $this->profileRepository->changePassword($data);
     }
-    public function changePassword2(UserEntity $user): bool
+    public function changePassword2($data): BaseResponse
     {
-        return $this->profileRepository->changePassword2($user);
+        return $this->profileRepository->changePassword2($data);
     }
 }

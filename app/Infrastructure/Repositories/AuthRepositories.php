@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Core\Domain\Exceptions\BaseException;
 use App\Core\Domain\DTO\BaseResponse;
 
-class AuthRepository implements AuthRepositoryInterface{
+class AuthRepositories implements AuthRepositoryInterface{
 
     public function register(UserEntity $data) : UserEntity {
         $result = User::create([

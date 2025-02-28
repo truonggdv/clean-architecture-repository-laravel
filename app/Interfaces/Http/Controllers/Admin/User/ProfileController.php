@@ -4,6 +4,7 @@ namespace App\Interfaces\Http\Controllers\Admin\User;
 
 use App\Interfaces\Http\Controllers\Controller;
 use App\Interfaces\Http\Requests\Profile\ChangePasswordRequest;
+use App\Interfaces\Http\Requests\Profile\ChangePassword2Request;
 use Illuminate\Http\Request;
 use App\Core\Domain\Entities\UserEntity;
 use App\Core\Application\Services\ProfileService;
@@ -41,5 +42,24 @@ class ProfileController extends Controller
         Auth::loginUsingId($user->id);
 
         return redirect()->back()->with('tab',1)->with('success', trans( 'Đổi mật khẩu thành công'));
+    }
+
+    public function postChangePassword2(ChangePassword2Request $request){
+
+        $data = $request->validated();
+
+        $data['username'] = Auth::user()->username;
+
+        $result = $this->profile_service->changePassword2($data);
+
+        if ($result->success === false) {
+            return redirect()->back()->withErrors($result->message);
+        }
+
+        $user = $result->data;
+
+        Auth::loginUsingId($user->id);
+
+        return redirect()->back()->with('tab',1)->with('success', trans( 'Đổi mật khẩu cấp 2 thành công'));
     }
 }

@@ -31,7 +31,6 @@ class ActivityLog extends BaseModel
 		'ip',
 		'user_agent',
 	];
-
     protected $dates = [
         'created_at',
         'updated_at',

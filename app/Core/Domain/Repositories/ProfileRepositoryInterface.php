@@ -7,6 +7,6 @@ use App\Core\Domain\DTO\BaseResponse;
 
 interface ProfileRepositoryInterface
 {
-    public function changePassword(UserEntity $data): BaseResponse;
-    public function changePassword2(UserEntity $data) : bool;
+    public function changePassword(UserEntity $data) : BaseResponse;
+    public function changePassword2(UserEntity $data) : BaseResponse;
 }

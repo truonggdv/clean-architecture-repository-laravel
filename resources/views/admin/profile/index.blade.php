@@ -669,7 +669,7 @@
                 <!--end::Tab-->
                 <!--begin::Tab-->
                 <div class="tab-pane px-7" id="kt_user_edit_tab_3" role="tabpanel" id="kt_user_edit_tab_3">
-                    <form class="form" action="{{route('admin.change-password')}}" method="POST">
+                    <form class="form" action="{{route('admin.change-password')}}" method="POST" id="formChangePassword">
                     {{ csrf_field() }}
                     <!--begin::Body-->
                     <div class="card-body">
@@ -682,7 +682,7 @@
                                     <label class="col-form-label col-3 text-lg-right text-left">{{__('Mật khẩu cũ')}}</label>
                                     <div class="col-9">
                                         <input class="form-control form-control-lg  mb-1"
-                                               type="password" name="old_password" value=""/>
+                                               type="password" name="old_password" required value=""/>
                                     </div>
                                 </div>
                                 <!--end::Group-->
@@ -690,13 +690,13 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-3 text-lg-right text-left">{{__('Mật khẩu mới')}}</label>
                                     <div class="col-9">
-                                        <input class="form-control form-control-lg " type="password" name="password" value=""/>
+                                        <input class="form-control form-control-lg " required type="password" name="password" value=""/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-3 text-lg-right text-left">{{__('Xác nhận mật khẩu mới')}}</label>
                                     <div class="col-9">
-                                        <input class="form-control form-control-lg " type="password" name="password_confirmation" value=""/>
+                                        <input class="form-control form-control-lg " required type="password" name="password_confirmation" value=""/>
                                     </div>
                                 </div>
                                 <!--end::Group-->
@@ -713,7 +713,7 @@
                                 <div class="row">
                                     <div class="col-3"></div>
                                     <div class="col-9">
-                                        <button type="submit" class="btn btn-light-primary font-weight-bold">Cập nhật</button>
+                                        <button type="submit" class="btn btn-light-primary font-weight-bold btn-submit-custom" data-form="formChangePassword">Cập nhật</button>
                                         <button type="reset" class="btn btn-clean font-weight-bold">Hủy</button>
                                     </div>
                                 </div>
@@ -725,7 +725,7 @@
                 </div>
                 <!--end::Tab-->
                 <div class="tab-pane px-7" id="kt_user_edit_tab_4" role="tabpanel" id="kt_user_edit_tab_4">
-                    <form class="form" action="{{route('admin.change-password2')}}" method="POST">
+                    <form class="form" action="{{route('admin.change-password2')}}" method="POST" id="formChangePassword2">
                     {{ csrf_field() }}
                     <!--begin::Body-->
                     <div class="card-body">
@@ -738,7 +738,7 @@
                                     <label class="col-form-label col-3 text-lg-right text-left">{{__('Mật khẩu cấp 2 cũ')}}</label>
                                     <div class="col-9">
                                         <input class="form-control form-control-lg  mb-1"
-                                               type="password" name="old_password" value=""/>
+                                               type="password" name="old_password" required value=""/>
 
                                     </div>
                                 </div>
@@ -747,13 +747,13 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-3 text-lg-right text-left">{{__('Mật khẩu cấp 2 mới')}}</label>
                                     <div class="col-9">
-                                        <input class="form-control form-control-lg " type="password" name="password" value=""/>
+                                        <input class="form-control form-control-lg " required type="password" name="password" value=""/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-3 text-lg-right text-left">{{__('Xác nhận mật khẩu cấp 2 mới')}}</label>
                                     <div class="col-9">
-                                        <input class="form-control form-control-lg " type="password" name="password_confirmation" value=""/>
+                                        <input class="form-control form-control-lg " type="password" required name="password_confirmation" value=""/>
                                     </div>
                                 </div>
                             <!--end::Group-->
@@ -770,7 +770,7 @@
                                 <div class="row">
                                     <div class="col-3"></div>
                                     <div class="col-9">
-                                        <button type="submit" class="btn btn-light-primary font-weight-bold">Cập nhật</button>
+                                        <button type="submit" class="btn btn-light-primary font-weight-bold btn-submit-custom" data-form="formChangePassword2" >Cập nhật</button>
                                         <button type="reset" class="btn btn-clean font-weight-bold">Hủy</button>
                                     </div>
                                 </div>
@@ -793,5 +793,25 @@
 @endsection
 {{-- Scripts Section --}}
 @section('scripts')
-    <script src="{{asset('assets/backend/themes/js/pages/custom/user/edit-user.js')}}"></script>
+    <script>
+        "use strict";
+        $(document).ready(function () {
+            $('.datetimepicker-default').datetimepicker({
+                useCurrent: true,
+                autoclose: true,
+                format: "DD/MM/YYYY HH:mm:ss"
+            });
+            $('.btn-submit-custom').click(function (e) {
+                e.preventDefault();
+                var btn = this;
+                $(".btn-submit-custom").each(function (index, value) {
+                    KTUtil.btnWait(this, "spinner spinner-right spinner-white pr-15", '{{__('Chờ xử lý')}}', true);
+                });
+                $('.btn-submit-dropdown').prop('disabled', true);
+                $('#submit-close').val($(btn).data('submit-close'));
+                var formSubmit = $('#' + $(btn).data('form'));
+                formSubmit.submit();
+            });
+        });
+    </script>
 @endsection
