@@ -48,15 +48,16 @@ Route::group(array('as' => 'admin.'),function(){
         Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
         Route::post('/change-password', [ProfileController::class, 'postChangePassword'])->name('change-password');
         Route::post('/change-password2', [ProfileController::class, 'postChangePassword2'])->name('change-password2');
-        Route::group(array('middleware' => ['2fa','clean_xss']),function(){
-            Route::get('/security-2fa/very','Admin\User\Security2FAController@getVery')->name('security-2fa.very');
-            Route::post('/security-2fa/very','Admin\User\Security2FAController@postVery');
-            Route::get('/security-2fa','Admin\User\Security2FAController@index')->name('security-2fa.index');
-            Route::get('/security-2fa/setup','Admin\User\Security2FAController@setup')->name('security-2fa.setup');
-            Route::post('/security-2fa/setup','Admin\User\Security2FAController@enable2fa');
-            Route::post('/security-2fa/disable2fa','Admin\User\Security2FAController@disable2fa')->name('security-2fa.disable2fa');
-            Route::get('/security-2fa/recovery-code','Admin\User\Security2FAController@getRecoveryCode')->name('security-2fa.recovery-code');
-            Route::post('/security-2fa/recovery-code','Admin\User\Security2FAController@postRecoveryCode');
-        });
+        Route::get('/security-2fa',[ProfileController::class, 'get_security_2fa'])->name('security-2fa.index');
+        Route::get('/security-2fa/setup',[ProfileController::class, 'setup_google_2fa'])->name('security-2fa.setup');
+        Route::post('/security-2fa/setup','Admin\User\Security2FAController@enable2fa');
+
+
+
+        Route::get('/security-2fa/very','Admin\User\Security2FAController@getVery')->name('security-2fa.very');
+        Route::post('/security-2fa/very','Admin\User\Security2FAController@postVery');
+        Route::post('/security-2fa/disable2fa','Admin\User\Security2FAController@disable2fa')->name('security-2fa.disable2fa');
+        Route::get('/security-2fa/recovery-code','Admin\User\Security2FAController@getRecoveryCode')->name('security-2fa.recovery-code');
+        Route::post('/security-2fa/recovery-code','Admin\User\Security2FAController@postRecoveryCode');
     });
 });

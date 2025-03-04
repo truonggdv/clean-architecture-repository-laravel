@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Interfaces\Http\Requests\Auth\LoginRequest;
 use App\Core\Domain\Entities\UserEntity;
 use App\Core\Application\Services\AuthService;
+use App\Core\Application\Services\ActivityLogService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,7 @@ class LoginController extends Controller
         $this->authService = $authService;
         $this->redirectTo = route('admin.dashboard');
         $this->redirectAfterLogout = route('admin.login');
+        $this->activity_log_service = $activity_log_service;
     }
 
     public function showLoginForm()
