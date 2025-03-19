@@ -11,6 +11,8 @@ use App\Core\Application\Services\AuthService;
 use App\Core\Application\Services\ActivityLogService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Library\Helpers;
+use DB;
 
 class LoginController extends Controller
 {
@@ -104,5 +106,35 @@ class LoginController extends Controller
         }
 
         return $request->wantsJson()? new JsonResponse([], 204) : redirect($this->redirectAfterLogout);
+    }
+    public function loginGmail(Request $request){
+        $url = config('services.google.return_url');
+        if(empty($url)){
+            return redirect()->to(route('admin.login'))->with('error_login_gmail', 'Google OAuth 2.0 chưa được cấu hình.Vui lòng liên hệ QTV để kịp thời xử lý');
+        }
+        $url = $url.'/'.str_replace(".","_",$request->getHost());
+        return redirect()->to($url);
+    }
+    public function callbackLoginGmail(Request $request,$token){
+        if(!$token){
+            abort(403);
+        }
+        $result = $this->authService->login_with_google($token);
+
+        if ($result->success === false) {
+            if($result->code == 403 ){
+                abort(403);
+            }
+            if($result->code == 404){
+                abort(404);
+            }
+            return redirect()->to(route('admin.login'))->with('error_login_gmail',$result->message);
+        }
+
+        Auth::loginUsingId($result->data->id);
+
+        $this->activity_log_service->add('Đăng nhập ADMIN thành công');
+
+        return redirect()->intended($this->redirectPath());
     }
 }

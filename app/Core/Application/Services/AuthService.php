@@ -34,4 +34,9 @@ class AuthService {
     {
         $this->authRepository->logout();
     }
+
+    public function login_with_google(string $token) : BaseResponse
+    {
+        return $this->authRepository->login_with_google($token);
+    }
 }

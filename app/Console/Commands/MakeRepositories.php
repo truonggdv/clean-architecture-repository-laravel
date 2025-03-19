@@ -57,18 +57,18 @@ class MakeRepositories extends Command
             return;
         }
         $stub = <<<EOT
-<?php
+            <?php
 
-namespace {$namespace};
+            namespace {$namespace};
 
-class {$className}
-{
-    public function __construct()
-    {
-       
-    }
-}
-EOT;
+            class {$className}
+            {
+                public function __construct()
+                {
+                
+                }
+            }
+            EOT;
 
     (new Filesystem)->ensureDirectoryExists(dirname($path));
         

@@ -58,15 +58,15 @@ class MakeReponsitoryInterface extends Command
         }
 
         $stub = <<<EOT
-        <?php
-        
-        namespace {$namespace};
-        
-        interface {$className}
-        {
+            <?php
             
-        }
-        EOT;
+            namespace {$namespace};
+            
+            interface {$className}
+            {
+                
+            }
+            EOT;
 
         (new Filesystem)->ensureDirectoryExists(dirname($path));
         file_put_contents($path, $stub);

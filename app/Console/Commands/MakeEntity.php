@@ -33,22 +33,22 @@ class MakeEntity extends Command
         }
 
         $stub = <<<EOT
-<?php
+            <?php
 
-namespace {$namespace};
+            namespace {$namespace};
 
-class {$className}
-{
-    public ?int \$id;
-    public ?string \$name;
+            class {$className}
+            {
+                public ?int \$id;
+                public ?string \$name;
 
-    public function __construct(array \$data)
-    {
-        \$this->id = \$data['id'] ?? null;
-        \$this->name = \$data['name'] ?? null;
-    }
-}
-EOT;
+                public function __construct(array \$data)
+                {
+                    \$this->id = \$data['id'] ?? null;
+                    \$this->name = \$data['name'] ?? null;
+                }
+            }
+            EOT;
 
         (new Filesystem)->ensureDirectoryExists(dirname($path));
         file_put_contents($path, $stub);
