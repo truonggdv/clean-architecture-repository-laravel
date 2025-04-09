@@ -5,6 +5,7 @@ use App\Interfaces\Http\Controllers\Admin\UserController;
 use App\Interfaces\Http\Controllers\Admin\Auth\RegisterController;
 use App\Interfaces\Http\Controllers\Admin\Auth\LoginController;
 use App\Interfaces\Http\Controllers\Admin\User\ProfileController;
+use App\Interfaces\Http\Controllers\Admin\PermissionController;
 
 
 
@@ -58,7 +59,11 @@ Route::group(array('as' => 'admin.'),function(){
             Route::post('/security-2fa/setup',[ProfileController::class, 'enable2fa']);
             Route::post('/security-2fa/disable2fa',[ProfileController::class, 'disable2fa'])->name('security-2fa.disable2fa');
             Route::get('/security-2fa/recovery-code',[ProfileController::class, 'getRecoveryCode'])->name('security-2fa.recovery-code');
-            Route::post('/security-2fa/recovery-code','Admin\User\Security2FAController@postRecoveryCode');
+            // Route::post('role/order', 'Admin\RoleController@order')->name('role.order');
+            // Route::resource('role','Admin\RoleController');
+            Route::post('permission/order', 'Admin\PermissionController@order')->name('permission.order');
+            Route::resource('permission','Admin\PermissionController');
+            // Route::resource('permission',[PermissionController::class, 'enable2fa']);
         });
     });
 });
