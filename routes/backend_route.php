@@ -63,7 +63,6 @@ Route::group(array('as' => 'admin.'),function(){
             // Route::resource('role','Admin\RoleController');
             Route::post('permission/order', 'Admin\PermissionController@order')->name('permission.order');
             Route::resource('permission','Admin\PermissionController');
-            // Route::resource('permission',[PermissionController::class, 'enable2fa']);
         });
     });
 });

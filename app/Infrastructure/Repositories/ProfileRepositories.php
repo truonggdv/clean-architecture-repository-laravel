@@ -150,7 +150,7 @@ class ProfileRepositories implements ProfileRepositoryInterface
         DB::beginTransaction();
         try {
             $google2fa = app('pragmarx.google2fa');
-            $result = $google2fa->verifyKey($user->google2fa_secret, $code);
+            $result = $google2fa->verifyKey($data->google2fa_secret, $code);
             if($result === false){
                 return BaseResponse::error("Mã bảo mật GG2FA không đúng", 400);
             }

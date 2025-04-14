@@ -46,6 +46,25 @@ return [
         //     'route' => 'admin.user-qtv.index',
         //     'page' => ''
         // ],
+        [
+            'section' => 'Hệ thống',
+            'permission' => '',
+        ],
+        // [
+        //     'title' => 'Nhóm vai trò',
+        //     'icon' => 'fas fa-crown',
+        //     'bullet' => 'line',
+        //     'route' => 'admin.role.index',
+        //     'page' => ''
+
+        // ],
+        [
+            'title' => 'Quyền truy cập',
+            'icon' => 'assets/backend/themes/media/svg/icons/Code/Git4.svg',
+            'bullet' => 'line',
+            'route' => 'admin.permission.index',
+            'page' => ''
+        ],
     ]
 
 ];

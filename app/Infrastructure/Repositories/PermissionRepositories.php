@@ -30,7 +30,7 @@ class PermissionRepositories implements PermissionRepositoryInterface
 
     public function list(Request $request)
     {
-        $paginate = 20;
+        $paginate = config('app.pagination_item');
 
         if($request->filled('paginate')){
             $paginate = $request->get('paginate');
