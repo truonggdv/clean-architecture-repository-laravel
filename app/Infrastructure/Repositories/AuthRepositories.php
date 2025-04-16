@@ -29,7 +29,7 @@ class AuthRepositories implements AuthRepositoryInterface{
         return new UserEntity($result->toArray());
     }
 
-    public function login($username, $password) {
+    public function login($username) {
         $user = User::where('username', $username)
         ->where('status', 1)
         ->where(function ($query){
@@ -37,17 +37,7 @@ class AuthRepositories implements AuthRepositoryInterface{
             $query->orWhere('account_type',3);
         })
         ->first();
-        if (!$user) {
-            return BaseResponse::error("Tài khoản hoặc mật khẩu không đúng", 401);
-        }
-        if($user->required_login_gmail == 1){
-            return BaseResponse::error("Tài khoản của bạn đã được cấu hình đăng nhập với google. Vui lòng đăng nhập bằng tài khoản google để truy cập vào hệ thống", 400);
-        }
-        if(!\Hash::check($password, $user->password)){
-            return BaseResponse::error("Tài khoản hoặc mật khẩu không đúng", 401);
-        }
-        $result = new UserEntity($user->toArray());
-        return BaseResponse::success($result,'Đăng nhập thành công',200);
+        return $user;
     }
 
     public function login_with_google(string $token) : BaseResponse

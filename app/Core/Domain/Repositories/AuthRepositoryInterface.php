@@ -8,6 +8,6 @@ use App\Core\Domain\DTO\BaseResponse;
 interface AuthRepositoryInterface
 {
     public function register(UserEntity $data): UserEntity;
-    public function login($username, $password);
+    public function login($username);
     public function login_with_google(string $token) : BaseResponse;
 }
