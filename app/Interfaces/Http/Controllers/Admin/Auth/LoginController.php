@@ -82,8 +82,6 @@ class LoginController extends Controller
         }
         $user = $result->data;
 
-        Auth::loginUsingId($user->id);
-
         $this->activity_log_service->add('Đăng nhập ADMIN thành công');
 
         return redirect()->intended($this->redirectPath());
