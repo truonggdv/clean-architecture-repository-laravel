@@ -5,6 +5,7 @@ namespace App\Core\Domain\UseCases;
 use App\Core\Domain\Entities\UserEntity;
 use App\Infrastructure\Persistence\Models\User;
 use App\Core\Domain\DTO\BaseResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LoginUseCase
 {
